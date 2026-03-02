@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Sheep – Bistro & Coffee · Bad Lippspringe</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black:   #0D0D0D;
+  --dark:    #151515;
+  --dark2:   #1C1C1C;
+  --dark3:   #242424;
+  --gold:    #C9B48C;
+  --gold2:   #D4C09E;
+  --cream:   #EDE3D0;
+  --cream2:  #F5EFE4;
+  --white:   #FDFAF5;
+  --muted:   #7A6E60;
+  --border:  rgba(201,180,140,0.15);
+  --border2: rgba(201,180,140,0.3);
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+
+body{
+  font-family:'Jost',sans-serif;
+  background:var(--black);
+  color:var(--cream);
+  overflow-x:hidden;
+}
+
+/* Grain overlay */
+body::before{
+  content:"";
+  position:fixed;inset:0;
+  pointer-events:none;
+  z-index:999;
+  opacity:0.025;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size:200px;
+}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;width:100%;z-index:100;
+  padding:0 2.5rem;
+  display:flex;align-items:center;justify-content:space-between;
+  height:70px;
+  background:rgba(13,13,13,0.92);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+  transition:background 0.3s;
+}
+
+.nav-logo{
+  display:flex;align-items:center;gap:0.8rem;
+  text-decoration:none;
+}
+
+.nav-logo img{
+  width:44px;height:44px;
+  border-radius:50%;
+  object-fit:cover;
+  border:1px solid var(--border2);
+}
+
+.nav-logo-text{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.3rem;
+  font-weight:600;
+  color:var(--cream);
+  letter-spacing:0.04em;
+}
+
+.nav-links{
+  display:flex;gap:2.2rem;list-style:none;align-items:center;
+}
+
+.nav-links a{
+  text-decoration:none;
+  color:var(--muted);
+  font-size:0.82rem;
+  font-weight:400;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  transition:color 0.25s;
+}
+
+.nav-links a:hover{color:var(--gold);}
+
+.nav-cta{
+  color:var(--gold) !important;
+  border:1px solid var(--border2);
+  padding:0.5rem 1.4rem;
+  border-radius:2px;
+  transition:background 0.25s, color 0.25s !important;
+}
+
+.nav-cta:hover{background:var(--gold) !important;color:var(--black) !important;}
+
+.hamburger{display:none;cursor:pointer;flex-direction:column;gap:5px;}
+.hamburger span{width:22px;height:1.5px;background:var(--cream);border-radius:2px;transition:0.3s;}
+
+/* ── HERO ── */
+#hero{
+  min-height:100vh;
+  display:flex;align-items:center;justify-content:center;
+  text-align:center;
+  padding:120px 2rem 6rem;
+  position:relative;
+  overflow:hidden;
+}
+
+.hero-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 70% 60% at 50% 40%, rgba(201,180,140,0.06) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 40% at 80% 80%, rgba(201,180,140,0.03) 0%, transparent 50%);
+}
+
+.hero-ring{
+  position:absolute;
+  width:600px;height:600px;
+  border:1px solid rgba(201,180,140,0.07);
+  border-radius:50%;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  pointer-events:none;
+}
+
+.hero-ring:nth-child(2){width:900px;height:900px;opacity:0.5;}
+.hero-ring:nth-child(3){width:1200px;height:1200px;opacity:0.25;}
+
+.hero-content{
+  position:relative;z-index:1;
+  max-width:800px;
+}
+
+.hero-logo-wrap{
+  display:flex;justify-content:center;
+  margin-bottom:2.5rem;
+}
+
+.hero-logo{
+  width:130px;height:130px;
+  border-radius:50%;
+  object-fit:cover;
+  border:1px solid var(--border2);
+  box-shadow:0 0 60px rgba(201,180,140,0.1);
+  animation:fadeIn 0.8s ease forwards;
+}
+
+.hero-eyebrow{
+  font-size:0.72rem;
+  letter-spacing:0.25em;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:1.5rem;
+  animation:fadeUp 0.7s 0.2s ease both;
+}
+
+.hero h1{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(3.5rem,8vw,7rem);
+  font-weight:300;
+  line-height:1.0;
+  color:var(--white);
+  letter-spacing:0.02em;
+  margin-bottom:1rem;
+  animation:fadeUp 0.7s 0.35s ease both;
+}
+
+.hero h1 em{
+  font-style:italic;
+  color:var(--gold2);
+  display:block;
+  font-size:0.7em;
+  font-weight:300;
+  letter-spacing:0.06em;
+}
+
+.hero-sub{
+  font-size:0.95rem;
+  color:var(--muted);
+  line-height:1.8;
+  max-width:480px;
+  margin:0 auto 2.5rem;
+  letter-spacing:0.02em;
+  animation:fadeUp 0.7s 0.5s ease both;
+}
+
+.hero-btns{
+  display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;
+  animation:fadeUp 0.7s 0.65s ease both;
+}
+
+.btn-gold{
+  background:transparent;
+  border:1px solid var(--gold);
+  color:var(--gold);
+  padding:0.85rem 2.2rem;
+  text-decoration:none;
+  font-size:0.8rem;
+  font-weight:400;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  border-radius:2px;
+  transition:background 0.25s, color 0.25s;
+  display:inline-block;
+}
+
+.btn-gold:hover{background:var(--gold);color:var(--black);}
+
+.btn-outline{
+  border:1px solid var(--border2);
+  color:var(--muted);
+  padding:0.85rem 2.2rem;
+  text-decoration:none;
+  font-size:0.8rem;
+  font-weight:400;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  border-radius:2px;
+  transition:border-color 0.25s,color 0.25s;
+  display:inline-block;
+}
+
+.btn-outline:hover{border-color:var(--gold);color:var(--gold);}
+
+.hero-scroll{
+  position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:0.5rem;
+  color:var(--muted);font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;
+  animation:fadeUp 0.7s 0.9s ease both;
+}
+
+.scroll-line{
+  width:1px;height:40px;
+  background:linear-gradient(to bottom, var(--gold), transparent);
+  animation:scrollDown 1.5s 1.5s infinite;
+}
+
+@keyframes scrollDown{
+  0%{transform:scaleY(0);transform-origin:top;opacity:1}
+  50%{transform:scaleY(1);transform-origin:top;opacity:1}
+  100%{transform:scaleY(1);transform-origin:bottom;opacity:0}
+}
+
+/* ── DIVIDER ── */
+.divider{
+  width:50px;height:1px;
+  background:linear-gradient(to right, transparent, var(--gold), transparent);
+  margin:0 auto 1.5rem;
+}
+
+/* ── SECTION BASE ── */
+section{padding:7rem 2rem;}
+
+.container{max-width:1100px;margin:0 auto;}
+
+.section-label{
+  font-size:0.68rem;
+  font-weight:400;
+  letter-spacing:0.2em;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:1rem;
+}
+
+h2{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2.2rem,4vw,3.5rem);
+  font-weight:300;
+  line-height:1.2;
+  color:var(--white);
+  margin-bottom:0.75rem;
+}
+
+h2 em{font-style:italic;color:var(--gold2);}
+
+/* ── HIGHLIGHTS ── */
+#highlights{
+  background:var(--dark);
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+}
+
+.highlights-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  border-left:1px solid var(--border);
+  margin-top:3rem;
+}
+
+.highlight{
+  padding:2.5rem 2rem;
+  border-right:1px solid var(--border);
+  border-top:1px solid var(--border);
+  position:relative;
+  transition:background 0.3s;
+}
+
+.highlight:hover{background:var(--dark2);}
+
+.h-icon{font-size:1.8rem;margin-bottom:1.2rem;display:block;opacity:0.8;}
+
+.highlight h3{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.3rem;
+  font-weight:400;
+  color:var(--cream2);
+  margin-bottom:0.6rem;
+  letter-spacing:0.02em;
+}
+
+.highlight p{font-size:0.85rem;color:var(--muted);line-height:1.7;}
+
+.h-num{
+  position:absolute;top:1.5rem;right:1.5rem;
+  font-family:'Cormorant Garamond',serif;
+  font-size:0.85rem;
+  color:rgba(201,180,140,0.2);
+  letter-spacing:0.08em;
+}
+
+/* ── ABOUT ── */
+#about{background:var(--black);}
+
+.about-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:6rem;align-items:center;
+  margin-top:2rem;
+}
+
+.about-text p{
+  color:var(--muted);
+  line-height:1.9;
+  font-size:0.97rem;
+  margin-bottom:1.3rem;
+  font-weight:300;
+}
+
+.quote-block{
+  border-left:2px solid var(--gold);
+  padding:1.2rem 0 1.2rem 1.8rem;
+  margin:2rem 0;
+}
+
+.quote-block p{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.35rem;
+  font-style:italic;
+  font-weight:300;
+  color:var(--cream2);
+  line-height:1.5;
+  margin:0;
+}
+
+.about-tiles{
+  display:grid;grid-template-columns:1fr 1fr;gap:1rem;
+}
+
+.about-tile{
+  background:var(--dark2);
+  border:1px solid var(--border);
+  border-radius:2px;
+  padding:1.8rem;
+  transition:border-color 0.3s;
+}
+
+.about-tile:hover{border-color:var(--border2);}
+.about-tile:first-child{grid-column:1/-1;background:var(--dark3);}
+
+.tile-icon{font-size:1.4rem;margin-bottom:0.8rem;display:block;}
+
+.tile-val{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.1rem;
+  color:var(--cream2);
+  margin-bottom:0.25rem;
+}
+
+.tile-label{font-size:0.75rem;color:var(--muted);letter-spacing:0.05em;}
+
+/* ── MENU ── */
+#menu{
+  background:var(--dark);
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+}
+
+.menu-tabs{
+  display:flex;gap:0;
+  border:1px solid var(--border);
+  width:fit-content;
+  margin:2.5rem 0;
+  border-radius:2px;
+  overflow:hidden;
+}
+
+.tab-btn{
+  background:transparent;
+  border:none;
+  border-right:1px solid var(--border);
+  padding:0.65rem 1.5rem;
+  cursor:pointer;
+  font-family:'Jost',sans-serif;
+  font-size:0.75rem;
+  font-weight:400;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  color:var(--muted);
+  transition:background 0.2s, color 0.2s;
+}
+
+.tab-btn:last-child{border-right:none;}
+.tab-btn:hover{color:var(--gold);}
+.tab-btn.active{background:var(--gold);color:var(--black);}
+
+.menu-panel{display:none;}
+.menu-panel.active{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+  gap:1px;
+  background:var(--border);
+  border:1px solid var(--border);
+}
+
+.menu-item{
+  background:var(--dark);
+  padding:1.5rem 1.8rem;
+  display:flex;justify-content:space-between;align-items:flex-start;
+  gap:1.5rem;
+  transition:background 0.2s;
+}
+
+.menu-item:hover{background:var(--dark2);}
+
+.menu-item h4{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.1rem;
+  font-weight:400;
+  color:var(--cream2);
+  margin-bottom:0.3rem;
+  letter-spacing:0.02em;
+}
+
+.menu-item p{font-size:0.82rem;color:var(--muted);line-height:1.55;}
+
+.menu-price{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1rem;
+  color:var(--gold);
+  white-space:nowrap;
+  padding-top:0.1rem;
+}
+
+.menu-badge{
+  display:inline-block;
+  font-size:0.65rem;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  color:var(--gold);
+  border:1px solid rgba(201,180,140,0.35);
+  padding:0.1rem 0.5rem;
+  border-radius:1px;
+  margin-top:0.45rem;
+}
+
+/* ── GALLERY ── */
+#gallery{background:var(--black);}
+
+.gallery-lead{color:var(--muted);max-width:460px;line-height:1.8;font-size:0.9rem;margin-bottom:3rem;font-weight:300;}
+
+.gallery-grid{
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr;
+  grid-template-rows:260px 260px;
+  gap:2px;
+}
+
+.gcell{
+  overflow:hidden;
+  position:relative;
+  cursor:pointer;
+  background:var(--dark2);
+}
+
+.gcell:first-child{grid-row:1/3;}
+
+.gcell-inner{
+  width:100%;height:100%;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  gap:0.6rem;
+  transition:transform 0.5s ease;
+}
+
+.gcell:hover .gcell-inner{transform:scale(1.04);}
+
+.gcell:nth-child(1) .gcell-inner{background:linear-gradient(160deg,#1a1210,#2d1e18);}
+.gcell:nth-child(2) .gcell-inner{background:linear-gradient(135deg,#181310,#251a12);}
+.gcell:nth-child(3) .gcell-inner{background:linear-gradient(135deg,#0e1210,#151e14);}
+.gcell:nth-child(4) .gcell-inner{background:linear-gradient(135deg,#12100e,#1a1510);}
+.gcell:nth-child(5) .gcell-inner{background:linear-gradient(135deg,#100e0c,#201810);}
+
+.gcell-icon{font-size:2.8rem;opacity:0.55;}
+.gcell-label{font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);}
+
+.gcell-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,0.6) 0%,transparent 50%);
+  pointer-events:none;
+}
+
+.gcell-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.gcell-inner {
+  display: none; /* alte Textlabels ausblenden */
+}
+
+/* ── HOURS ── */
+#hours{
+  background:var(--dark);
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+}
+
+.hours-wrap{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:4rem;margin-top:3rem;align-items:start;
+}
+
+.hours-table{width:100%;border-collapse:collapse;}
+
+.hours-table tr{
+  border-bottom:1px solid var(--border);
+  transition:background 0.2s;
+}
+
+.hours-table tr:last-child{border-bottom:none;}
+.hours-table tr:hover{background:var(--dark2);}
+
+.hours-table td{
+  padding:1rem 0.5rem;
+  font-size:0.9rem;
+  font-weight:300;
+}
+
+.hours-table td:first-child{color:var(--muted);letter-spacing:0.04em;}
+.hours-table td:last-child{text-align:right;color:var(--cream);}
+
+.hours-table .closed td{color:rgba(201,180,140,0.3) !important;}
+.hours-table .today td{color:var(--gold) !important;}
+.hours-table .today td:first-child::after{content:" ·";color:var(--gold);}
+
+.location-card{
+  background:var(--dark2);
+  border:1px solid var(--border);
+  border-radius:2px;
+  padding:2.5rem;
+}
+
+.location-card h3{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.4rem;font-weight:400;
+  color:var(--cream2);
+  margin-bottom:1.5rem;
+  letter-spacing:0.02em;
+}
+
+.loc-row{
+  display:flex;gap:1rem;
+  margin-bottom:1.2rem;
+  align-items:flex-start;
+}
+
+.loc-icon{
+  width:36px;height:36px;min-width:36px;
+  border:1px solid var(--border2);
+  border-radius:2px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.65rem;font-weight:500;letter-spacing:0.08em;
+  color:var(--gold);background:var(--dark3);
+  text-transform:uppercase;
+}
+
+.loc-label{font-size:0.7rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);margin-bottom:0.2rem;}
+.loc-val{font-size:0.9rem;color:var(--cream);font-weight:300;line-height:1.5;}
+
+.map-btn{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  margin-top:1.5rem;
+  border:1px solid var(--border2);
+  color:var(--gold);
+  padding:0.7rem 1.4rem;
+  font-size:0.75rem;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  text-decoration:none;
+  border-radius:2px;
+  transition:background 0.25s,color 0.25s;
+}
+
+.map-btn:hover{background:var(--gold);color:var(--black);}
+
+.note-box{
+  margin-top:1.5rem;
+  padding:1rem 1.2rem;
+  border:1px solid var(--border);
+  border-left:2px solid var(--gold);
+  font-size:0.82rem;
+  color:var(--muted);
+  line-height:1.7;
+}
+
+.note-box a{color:var(--gold);text-decoration:none;}
+
+/* ── CONTACT ── */
+#contact{background:var(--black);}
+
+.contact-wrap{
+  display:grid;grid-template-columns:1fr 1.3fr;
+  gap:4rem;margin-top:3rem;align-items:start;
+}
+
+.contact-info-item{
+  display:flex;gap:1rem;
+  margin-bottom:1.8rem;
+  align-items:flex-start;
+}
+
+.ci-icon{
+  width:42px;height:42px;min-width:42px;
+  border:1px solid var(--border);
+  border-radius:2px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.65rem;font-weight:500;letter-spacing:0.08em;
+  color:var(--gold);background:var(--dark2);
+  text-transform:uppercase;
+}
+
+.ci-label{font-size:0.7rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);margin-bottom:0.2rem;}
+.ci-val{color:var(--cream);font-size:0.92rem;font-weight:300;line-height:1.5;}
+.ci-val a{color:var(--gold);text-decoration:none;}
+
+.socials{display:flex;gap:0.75rem;margin-top:2.5rem;}
+
+.social-btn{
+  width:42px;height:42px;
+  border:1px solid var(--border);
+  border-radius:2px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1rem;
+  text-decoration:none;
+  background:var(--dark2);
+  transition:border-color 0.25s,background 0.25s;
+}
+
+.social-btn:hover{border-color:var(--gold);background:var(--dark3);}
+
+.contact-form{
+  background:var(--dark2);
+  border:1px solid var(--border);
+  border-radius:2px;
+  padding:2.5rem;
+}
+
+.cf-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.5rem;font-weight:400;
+  color:var(--cream2);
+  margin-bottom:2rem;
+  letter-spacing:0.02em;
+}
+
+.form-group{margin-bottom:1.2rem;}
+
+.form-group label{
+  display:block;
+  font-size:0.68rem;
+  font-weight:400;
+  text-transform:uppercase;
+  letter-spacing:0.1em;
+  color:var(--muted);
+  margin-bottom:0.5rem;
+}
+
+.form-group input, .form-group textarea{
+  width:100%;
+  padding:0.85rem 1rem;
+  background:var(--dark3);
+  border:1px solid var(--border);
+  border-radius:2px;
+  font-family:'Jost',sans-serif;
+  font-size:0.9rem;
+  color:var(--cream);
+  outline:none;
+  transition:border-color 0.25s;
+  resize:none;
+}
+
+.form-group input:focus,.form-group textarea:focus{border-color:var(--gold);}
+.form-group input::placeholder,.form-group textarea::placeholder{color:var(--muted);}
+.form-group textarea{height:115px;}
+
+.form-submit{
+  width:100%;
+  padding:0.9rem;
+  background:transparent;
+  border:1px solid var(--gold);
+  color:var(--gold);
+  font-family:'Jost',sans-serif;
+  font-size:0.78rem;
+  font-weight:400;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  cursor:pointer;
+  border-radius:2px;
+  transition:background 0.25s,color 0.25s;
+}
+
+.form-submit:hover{background:var(--gold);color:var(--black);}
+
+/* ── FOOTER ── */
+footer{
+  background:var(--dark);
+  border-top:1px solid var(--border);
+  padding:4rem 2rem;
+  text-align:center;
+}
+
+.footer-logo-wrap{
+  display:flex;align-items:center;justify-content:center;gap:1rem;
+  margin-bottom:1.5rem;
+}
+
+.footer-logo-img{
+  width:52px;height:52px;border-radius:50%;
+  object-fit:cover;border:1px solid var(--border2);
+}
+
+.footer-logo-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.6rem;font-weight:400;
+  color:var(--cream);letter-spacing:0.05em;
+}
+
+footer p{font-size:0.82rem;color:var(--muted);line-height:1.9;font-weight:300;}
+footer a{color:var(--gold);text-decoration:none;}
+.footer-copy{margin-top:2rem;font-size:0.72rem;color:rgba(122,110,96,0.5);}
+
+/* ── MOBILE ── */
+@media(max-width:900px){
+  .highlights-grid{grid-template-columns:1fr 1fr;}
+  .about-grid,.hours-wrap,.contact-wrap{grid-template-columns:1fr;gap:2.5rem;}
+  .gallery-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto;}
+  .gcell:first-child{grid-row:auto;}
+  .gcell{height:180px;}
+  .menu-tabs{flex-wrap:wrap;border-radius:2px;}
+  .tab-btn{border-right:none;border-bottom:1px solid var(--border);}
+  .tab-btn:last-child{border-bottom:none;}
+}
+
+@media(max-width:640px){
+  .highlights-grid{grid-template-columns:1fr;}
+  .nav-links{
+    display:none;flex-direction:column;
+    position:absolute;top:70px;left:0;right:0;
+    background:rgba(13,13,13,0.97);
+    padding:2rem 2.5rem;
+    border-bottom:1px solid var(--border);
+    gap:1.2rem;
+  }
+  .nav-links.open{display:flex;}
+  .hamburger{display:flex;}
+  section{padding:5rem 1.5rem;}
+  .hero h1{font-size:3.2rem;}
+}
+
+.socials {
+  display: flex;
+  gap: 0.8rem;
+}
+
+.social-btn img.social-icon {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 2px;
+  border: 1px solid rgba(201,180,140,0.35);
+  background: var(--dark3);
+  padding: 4px;
+  transition: opacity 0.25s;
+}
+
+.social-btn img.social-icon:hover {
+  opacity: 0.7;
+}
+
+
+/* ── ANIMATIONS ── */
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <img src="thesheeplogo.png" alt="The Sheep Logo">
+    <span class="nav-logo-text">The Sheep</span>
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">Über uns</a></li>
+    <li><a href="#menu">Speisekarte</a></li>
+    <li><a href="#gallery">Galerie</a></li>
+    <li><a href="#hours">Öffnungszeiten</a></li>
+    <li><a href="#contact" class="nav-cta">Kontakt</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-ring"></div>
+  <div class="hero-ring"></div>
+  <div class="hero-ring"></div>
+  <div class="hero-content">
+    <div class="hero-logo-wrap">
+      <img src="thesheeplogo.png" alt="The Sheep Logo">
+    </div>
+    <div class="hero-eyebrow">Bistro & Coffee · Bad Lippspringe</div>
+    <h1>The Sheep<em>.Wo man gerne bleibt.</em></h1>
+    <p class="hero-sub">Ein gemütliches Café mitten in Bad Lippspringe. Frühstück, handgemachte Waffeln und richtig guter Kaffee – jeden Tag mit Herzblut zubereitet.</p>
+    <div class="hero-btns">
+      <a href="#menu" class="btn-gold">Speisekarte</a>
+      <a href="#contact" class="btn-outline">Kontakt</a>
+    </div>
+  </div>
+  
+</section>
+
+<!-- HIGHLIGHTS -->
+<section id="highlights">
+  <div class="container">
+    <div class="section-label">Was uns ausmacht</div>
+    <h2>Vier Gründe, <em>vorbeizukommen</em></h2>
+    <div class="highlights-grid">
+      <div class="highlight">
+        <h3>Frühstück</h3>
+        <p>Täglich frisch – von cremigem Rührei bis zum herzhaften Toast. Serviert ab 9:30 Uhr, bis ihr satt seid.</p>
+        <span class="h-num">01</span>
+      </div>
+      <div class="highlight">
+        <h3>Kaffee</h3>
+        <p>Handverlesene Bohnen, perfekt extrahiert. Ob Espresso, Flat White oder Filterkaffee – hier stimmt jede Tasse.</p>
+        <span class="h-num">02</span>
+      </div>
+      <div class="highlight">
+        <h3>Waffeln</h3>
+        <p>Klassisch, Bubble oder Kartoffel – selbst gebacken, täglich frisch. Das Herzstück unserer Speisekarte.</p>
+        <span class="h-num">03</span>
+      </div>
+      <div class="highlight">
+        <h3>Atmosphäre</h3>
+        <p>Warme Lichter, gemütliche Ecken, freundliche Gesichter. Ein Ort, an dem man einfach ankommen kann.</p>
+        <span class="h-num">04</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div>
+        <div class="section-label">Über The Sheep</div>
+        <h2>Mehr als<em>ein Café.</em></h2>
+        <div class="about-text" style="margin-top:1.5rem;">
+          <p>The Sheep ist ein Treffpunkt. Für Familien am Sonntagmorgen. Für Freunde unter der Woche. Für alle, die sich eine Auszeit gönnen wollen.</p>
+          <p>Wir glauben, dass gutes Essen und ehrlicher Service zusammengehören. Deshalb verwenden wir frische Zutaten, backen unsere Waffeln täglich selbst und nehmen uns Zeit für jeden Gast.</p>
+          <div class="quote-block">
+            <p>„Gemütlichkeit ist keine Dekoration – sie ist eine Haltung."</p>
+          </div>
+          <p>Am Friedrich-Wilhelm-Weber-Platz in Bad Lippspringe sind wir zuhause. Ihr auch – sobald ihr reinkommt.</p>
+        </div>
+        <a href="#contact" class="btn-gold" style="margin-top:2rem;display:inline-block;">Besucht uns</a>
+      </div>
+      <div class="about-tiles">
+        <div class="about-tile">
+          <div class="tile-val">4,7 Sterne · 555 Bewertungen</div>
+          <div class="tile-label">Google · Hochbewertet</div>
+        </div>
+        <div class="about-tile">
+          <div class="tile-val">Bad Lippspringe</div>
+          <div class="tile-label">Unser Zuhause</div>
+        </div>
+        <div class="about-tile">
+          <div class="tile-val">Täglich frisch</div>
+          <div class="tile-label">Alle Speisen handgemacht</div>
+        </div>
+        <div class="about-tile">
+          <div class="tile-val">Freundlicher Service</div>
+          <div class="tile-label">Für jeden Gast Zeit</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section id="menu">
+  <div class="container">
+    <div class="section-label">Was wir anbieten</div>
+    <h2>Unsere <em>Speisekarte</em></h2>
+    <div class="menu-tabs">
+      <button class="tab-btn active" onclick="showTab('kaffee',this)">Kaffee &amp; Getränke</button>
+      <button class="tab-btn" onclick="showTab('fruehstueck',this)">Frühstück</button>
+      <button class="tab-btn" onclick="showTab('waffeln',this)">Waffeln &amp; Süßes</button>
+      <button class="tab-btn" onclick="showTab('desserts',this)">Desserts &amp; Kuchen</button>
+    </div>
+
+    <!-- Kaffee & Getränke -->
+    <div class="menu-panel active" id="tab-kaffee">
+      <div class="menu-item"><div><h4>Espresso</h4><p>Klassischer italienischer Espresso</p></div><div class="menu-price">2,70 €</div></div>
+      <div class="menu-item"><div><h4>Doppelter Espresso</h4><p>Stärker und intensiver</p></div><div class="menu-price">3,90 €</div></div>
+      <div class="menu-item"><div><h4>Macchiato</h4><p>Espresso mit einem Schuss Milchschaum</p></div><div class="menu-price">3,20 €</div></div>
+      <div class="menu-item"><div><h4>Cappuccino</h4><p>Espresso mit cremigem Milchschaum</p></div><div class="menu-price">3,90 €</div></div>
+      <div class="menu-item"><div><h4>Latte Macchiato</h4><p>Milchschaum &amp; Espresso in Schichten</p></div><div class="menu-price">4,20 €</div></div>
+      <div class="menu-item"><div><h4>Filterkaffee</h4><p>Frisch gebrühter Klassiker</p></div><div class="menu-price">3,10 €</div></div>
+      <div class="menu-item"><div><h4>Tee</h4><p>Versch. Sorten – Schwarz, Grün, Kräuter</p></div><div class="menu-price">3,50 €</div></div>
+      <div class="menu-item"><div><h4>Chai Latte</h4><p>Gewürzter Tee mit Milch</p></div><div class="menu-price">4,50 €</div></div>
+    </div>
+
+    <!-- Frühstück -->
+    <div class="menu-panel" id="tab-fruehstueck">
+      <div class="menu-item" style="grid-column:1/-1"><div><h4>BIG SHEEP Frühstück <span style="font-family:'Jost';font-size:0.75rem;font-weight:300;color:var(--muted);letter-spacing:0.05em;">für 2 Personen</span></h4><p>Brötchen, Eier, Aufschnitt, Käse, hausgemachte Marmelade, Obst, Orangensaft &amp; Kaffee oder Tee ohne Limit</p></div><div class="menu-price">18,90 €</div></div>
+    </div>
+
+    <!-- Waffeln & Süßes -->
+    <div class="menu-panel" id="tab-waffeln">
+      <div class="menu-item"><div><h4>Klassische Waffel</h4><p>Mit Puderzucker serviert</p></div><div class="menu-price">6,50 €</div></div>
+      <div class="menu-item"><div><h4>Waffel mit Früchten</h4><p>Frische Früchte &amp; Sahne</p></div><div class="menu-price">8,90 €</div></div>
+      <div class="menu-item"><div><h4>Waffel mit Eis</h4><p>Zwei Kugeln Eis &amp; Sahne</p></div><div class="menu-price">9,90 €</div></div>
+      <div class="menu-item"><div><h4>Crêpes süß</h4><p>Mit Zucker oder Zimt &amp; Zucker</p></div><div class="menu-price">7,90 €</div></div>
+      <div class="menu-item"><div><h4>Crêpes mit Nutella</h4><p>Mit Schokocreme</p></div><div class="menu-price">8,90 €</div></div>
+      <div class="menu-item"><div><h4>Obstsalat frisch</h4><p>Saisonale Früchte</p></div><div class="menu-price">7,50 €</div></div>
+    </div>
+
+    <!-- Desserts & Kuchen -->
+    <div class="menu-panel" id="tab-desserts">
+      <div class="menu-item" style="grid-column:1/-1"><div><h4>Hausgemachter Kuchen</h4><p>Wechselt je nach Tagesangebot – täglich frisch gebacken</p></div><div class="menu-price">4,90 €</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="container">
+    <div class="section-label">Einblicke</div>
+    <h2>Schaut euch <em>um</em></h2>
+    <p class="gallery-lead">
+      Warme Lichter, gemütliche Ecken, Speisen bei denen man nicht aufhören möchte. 
+      Am besten selbst vorbeikommen.
+    </p>
+
+    <div class="gallery-grid">
+
+      <div class="gcell">
+        <img src="interieur.jpg" alt="Interieur" class="gcell-img">
+        <div class="gcell-overlay"></div>
+      </div>
+
+      <div class="gcell">
+        <img src="waffel.jpg" alt="Waffeln" class="gcell-img">
+        <div class="gcell-overlay"></div>
+      </div>
+
+      <div class="gcell">
+        <img src="frühstück.png" alt="Frühstück" class="gcell-img">
+        <div class="gcell-overlay"></div>
+      </div>
+
+      <div class="gcell">
+        <img src="kuchen.jpg" alt="Abendstimmung" class="gcell-img">
+        <div class="gcell-overlay"></div>
+      </div>
+
+      <div class="gcell">
+        <img src="thesheeplogo.png" alt="Mittagsküche" class="gcell-img">
+        <div class="gcell-overlay"></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- HOURS -->
+<section id="hours">
+  <div class="container">
+    <div class="section-label">Wann ihr uns findet</div>
+    <h2>Öffnungszeiten & <em>Standort</em></h2>
+    <div class="hours-wrap">
+      <div>
+        <table class="hours-table">
+          <tr><td>Montag</td><td>09:30 – 18:30 Uhr</td></tr>
+          <tr class="closed"><td>Dienstag</td><td>Ruhetag</td></tr>
+          <tr><td>Mittwoch</td><td>09:30 – 18:30 Uhr</td></tr>
+          <tr><td>Donnerstag</td><td>09:30 – 18:30 Uhr</td></tr>
+          <tr><td>Freitag</td><td>09:30 – 18:30 Uhr</td></tr>
+          <tr><td>Samstag</td><td>09:30 – 18:30 Uhr</td></tr>
+          <tr><td>Sonntag</td><td>09:30 – 18:30 Uhr</td></tr>
+        </table>
+        <div class="note-box" style="margin-top:1.5rem;">
+          Für Gruppen ab 8 Personen empfehlen wir eine kurze Voranmeldung unter <a href="tel:+4917624511607">+49 176 24511607</a>.
+        </div>
+      </div>
+      <div>
+        <div class="location-card">
+          <h3>Findet uns hier</h3>
+          <div class="loc-row">
+            <div class="loc-icon">A</div>
+            <div>
+              <div class="loc-label">Adresse</div>
+              <div class="loc-val">Friedrich-Wilhelm-Weber-Platz 38<br>33175 Bad Lippspringe</div>
+            </div>
+          </div>
+          <div class="loc-row">
+            <div class="loc-icon">T</div>
+            <div>
+              <div class="loc-label">Telefon</div>
+              <div class="loc-val"><a href="tel:+4917624511607" style="color:var(--gold);text-decoration:none;">+49 176 24511607</a></div>
+            </div>
+          </div>
+          <div class="loc-row">
+            <div class="loc-icon">&#x2192;</div>
+            <div>
+              <div class="loc-label">Anreise</div>
+              <div class="loc-val">Gut erreichbar mit Bus & PKW. Parkplätze in der Nähe vorhanden.</div>
+            </div>
+          </div>
+          <a href="https://maps.google.com/?cid=3541133388780479951" target="_blank" class="map-btn">In Google Maps öffnen →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="section-label">Schreibt uns</div>
+    <h2>Wir freuen uns <em>von euch zu hören</em></h2>
+
+    <div class="contact-wrap">
+
+      <div>
+        <div class="contact-info-item">
+          <div class="ci-icon">A</div>
+          <div>
+            <div class="ci-label">Adresse</div>
+            <div class="ci-val">
+              Friedrich-Wilhelm-Weber-Platz 38<br>
+              33175 Bad Lippspringe
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-info-item">
+          <div class="ci-icon">T</div>
+          <div>
+            <div class="ci-label">Telefon</div>
+            <div class="ci-val">
+              <a href="tel:+4917624511607">+49 176 24511607</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-info-item">
+          <div class="ci-icon">O</div>
+          <div>
+            <div class="ci-label">Öffnungszeiten</div>
+            <div class="ci-val">
+              Mo, Mi–So: 09:30 – 18:30 Uhr<br>
+              <span style="color:rgba(201,180,140,0.35);">Di: Ruhetag</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:0.5rem;">
+          <div class="ci-label" style="margin-bottom:0.8rem;">Social Media</div>
+          <div class="socials">
+            <a href="#" class="social-btn" title="Instagram">
+              <img src="instagramlogo.png" alt="Instagram" class="social-icon">
+            </a>
+            <a href="#" class="social-btn" title="Facebook">
+              <img src="facebooklogo.png" alt="Facebook" class="social-icon">
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form">
+        <div class="cf-title">Nachricht schicken</div>
+
+        <div class="form-group">
+          <label>Euer Name</label>
+          <input type="text" placeholder="z. B. Anna Müller">
+        </div>
+
+        <div class="form-group">
+          <label>E-Mail</label>
+          <input type="email" placeholder="anna@beispiel.de">
+        </div>
+
+        <div class="form-group">
+          <label>Nachricht</label>
+          <textarea placeholder="Was möchtet ihr uns sagen?"></textarea>
+        </div>
+
+        <button class="form-submit" onclick="handleSubmit(event)">Nachricht absenden</button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo-wrap">
+    <img src="thesheeplogo.png" alt="The Sheep Logo">
+    <span class="footer-logo-name">The Sheep</span>
+  </div>
+  <div class="divider"></div>
+  <p>Bistro & Coffee · Friedrich-Wilhelm-Weber-Platz 38, 33175 Bad Lippspringe</p>
+  <p><a href="tel:+4917624511607">+49 176 24511607</a></p>
+  <p style="margin-top:0.5rem;">Mo, Mi–So: 09:30 – 18:30 Uhr · <span style="color:rgba(201,180,140,0.35);">Di: Ruhetag</span></p>
+  <div class="footer-copy">© 2025 The Sheep – Bistro & Coffee Bad Lippspringe</div>
+</footer>
+
+<script>
+function toggleMenu(){
+  document.getElementById('navLinks').classList.toggle('open');
+}
+
+function showTab(id, btn){
+  document.querySelectorAll('.menu-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+
+function handleSubmit(e){
+  const btn = e.target;
+  btn.textContent = 'Nachricht gesendet';
+  btn.style.background = 'var(--gold)';
+  btn.style.color = 'var(--black)';
+  setTimeout(()=>{
+    btn.textContent = 'Nachricht absenden';
+    btn.style.background='';btn.style.color='';
+  },3000);
+}
+
+// Highlight today
+const days=['Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag'];
+const today=days[new Date().getDay()];
+document.querySelectorAll('.hours-table tr').forEach(row=>{
+  if(row.cells[0]&&row.cells[0].textContent.trim()===today){
+    row.classList.add('today');
+  }
+});
+</script>
+</body>
+</html>
+
