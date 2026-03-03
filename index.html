@@ -54,17 +54,23 @@ nav{
   transition:background 0.3s;
 }
 
-.nav-logo{
-  display:flex;align-items:center;gap:0.8rem;
-  text-decoration:none;
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  text-decoration: none;
 }
 
-.nav-logo img{
-  width:44px;height:44px;
-  border-radius:50%;
-  object-fit:cover;
-  border:1px solid var(--border2);
+.nav-logo img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+  border: 1px solid var(--border2);
+  display: block;
 }
+
 
 .nav-logo-text{
   font-family:'Cormorant Garamond',serif;
@@ -889,7 +895,7 @@ footer a{color:var(--gold);text-decoration:none;}
     <div class="about-grid">
       <div>
         <div class="section-label">Über The Sheep</div>
-        <h2>Mehr als<em>ein Café.</em></h2>
+        <h2>Mehr als<em> ein Café.</em></h2>
         <div class="about-text" style="margin-top:1.5rem;">
           <p>The Sheep ist ein Treffpunkt. Für Familien am Sonntagmorgen. Für Freunde unter der Woche. Für alle, die sich eine Auszeit gönnen wollen.</p>
           <p>Wir glauben, dass gutes Essen und ehrlicher Service zusammengehören. Deshalb verwenden wir frische Zutaten, backen unsere Waffeln täglich selbst und nehmen uns Zeit für jeden Gast.</p>
@@ -1105,10 +1111,19 @@ footer a{color:var(--gold);text-decoration:none;}
         <div style="margin-top:0.5rem;">
           <div class="ci-label" style="margin-bottom:0.8rem;">Social Media</div>
           <div class="socials">
-            <a href="#" class="social-btn" title="Instagram">
+            <a href="https://www.instagram.com/bistro_thesheep/?hl=de"
+               class="social-btn"
+               title="Instagram"
+               target="_blank"
+               rel="noopener">
               <img src="instagramlogo.png" alt="Instagram" class="social-icon">
             </a>
-            <a href="#" class="social-btn" title="Facebook">
+
+            <a href="https://www.facebook.com/bistrothesheep/?locale=de_DE"
+               class="social-btn"
+               title="Facebook"
+               target="_blank"
+               rel="noopener">
               <img src="facebooklogo.png" alt="Facebook" class="social-icon">
             </a>
           </div>
@@ -1139,7 +1154,6 @@ footer a{color:var(--gold);text-decoration:none;}
     </div>
   </div>
 </section>
-
 
 <!-- FOOTER -->
 <footer>
