@@ -6,6 +6,7 @@
 <title>The Sheep – Bistro & Coffee · Bad Lippspringe</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
+  
 :root {
   --black:   #0D0D0D;
   --dark:    #151515;
@@ -1200,6 +1201,16 @@ document.querySelectorAll('.hours-table tr').forEach(row=>{
   }
 });
 </script>
+
+<script>
+  if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+  }
+  window.onload = function() {
+    window.scrollTo(0, 0);
+  };
+</script>
+
 </body>
 </html>
 
